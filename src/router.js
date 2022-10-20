@@ -9,6 +9,10 @@ import AddTutorial from "./views/AddTutorial.vue"
 import ViewTutorial from "./views/ViewTutorial.vue"
 import AddLesson from "./views/AddLesson.vue"
 import EditLesson from "./views/EditLesson.vue"
+import CourseCatalog from "./views/CourseCatalog.vue"
+import ChairCourseList from "./views/ChairCourseList.vue"
+import EditChairCourseList from "./views/EditChairCourseList.vue"
+import AddChairCourseList from "./views/AddChairCourseList.vue"
 
 Vue.use(Router)
 
@@ -57,7 +61,28 @@ const router =  new Router({
       name: "editLesson",
       component: EditLesson,
       props: true
-    }
+    },
+    {
+      path: "/courses",
+      name: "courses",
+      component: CourseCatalog
+    },
+    {
+      path: "/courselists",
+      name: "courselists",
+      component: ChairCourseList
+    },
+    {
+      path: "/editcourses/:id",
+      name: "editcourse",
+      component: EditChairCourseList,
+      props: true
+    },
+    {
+      path: "/addcourses",
+      name: "addcourse",
+      component: AddChairCourseList
+    },
   ]
 })
 

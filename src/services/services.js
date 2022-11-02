@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === "development") {
   baseurl = "http://localhost/tutorial/";
 } else {
   baseurl = "/tutorial/";
-}
+} 
  
 const apiClient = axios.create({
   baseURL: baseurl,

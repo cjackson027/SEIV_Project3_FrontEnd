@@ -92,9 +92,9 @@ export default {
     editCourse(course) {
       this.$router.push({ name: 'editcourse', params: { id: course.courseId } });
     },
-    // viewCourse(tutorial) {
-    //   this.$router.push({ name: 'view', params: { id: tutorial.id } });
-    // },
+    viewCourse(course) {
+      this.$router.push({ name: 'viewchaircourse', params: { id: course.id } });
+    },
     deleteCourse(course) {
       CourseServices.delete(course.courseId)
         .then( () => {

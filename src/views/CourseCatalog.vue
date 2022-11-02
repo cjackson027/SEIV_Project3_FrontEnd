@@ -28,9 +28,17 @@
             :items="courses"
             :items-per-page="50"
           >
-          <!-- <template v-slot:[`item.actions`]="{ item }">  
-            <div>   
+
+           <template v-slot:[`item.actions`]="{ item }">  
+            <div>  
             <v-icon
+              small
+              class="mx-4"
+              @click="viewCourseInfo(item)"
+              >
+              mdi-format-list-bulleted-type
+            </v-icon> 
+            <!-- <v-icon
               small
               class="mx-4"
               @click="editCourse(item)"
@@ -40,19 +48,12 @@
             <v-icon
               small
               class="mx-4"
-              @click="viewCourse(item)"
-            >
-              mdi-format-list-bulleted-type
-            </v-icon>
-            <v-icon
-              small
-              class="mx-4"
               @click="deleteCourse(item)"
             >
             mdi-trash-can
-            </v-icon>
+            </v-icon> -->
             </div> 
-          </template> -->
+          </template> 
           </v-data-table>
         </v-card>
       </v-container>
@@ -92,9 +93,9 @@
     //   editCourse(course) {
     //     this.$router.push({ name: 'editcourse', params: { id: course.courseId } });
     //   },
-    //   // viewCourse(tutorial) {
-    //   //   this.$router.push({ name: 'view', params: { id: tutorial.id } });
-    //   // },
+        viewCourseInfo(course) {
+          this.$router.push({ name: 'viewCourse', params: { id: course.courseid } });
+        },
     //   deleteCourse(course) {
     //     CourseServices.delete(course.courseId)
     //       .then( () => {

@@ -1,7 +1,7 @@
 <template>
   <v-container>
       <v-toolbar>
-        <v-toolbar-title>Welcome to Tutorials!</v-toolbar-title>
+        <v-toolbar-title>Welcome!</v-toolbar-title>
       </v-toolbar>
       <br><br>
       <SocialLogin />

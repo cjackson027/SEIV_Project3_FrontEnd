@@ -6,8 +6,9 @@
                 flat
               >
               <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
-                <v-btn
+              <v-btn color=”primary” dark @click.stop="dialog = true">New Event</v-btn>
+                <!-- Button used to set date on calendar to Today -->
+              <v-btn
                   outlined
                   class="mr-4"
                   color="grey darken-2"
@@ -15,6 +16,8 @@
                 >
                   Today
                 </v-btn>
+
+                <!-- Button used to go previous or next in day, week, or month -->
                 <v-btn
                   fab
                   text
@@ -37,6 +40,9 @@
                     mdi-chevron-right
                   </v-icon>
                 </v-btn>
+
+
+                
                 <v-toolbar-title v-if="$refs.calendar">
                   {{ $refs.calendar.title }}
                 </v-toolbar-title>
@@ -45,7 +51,7 @@
                   bottom
                   right
                 >
-                  <template v-slot:activator="{ on, attrs }">
+                  <template v-slot:activator="{ on }">
                     <v-btn
                       outlined
                       color="grey darken-2"
@@ -73,8 +79,58 @@
                     </v-list-item> -->
                   </v-list>
                 </v-menu>
+                
               </v-toolbar>
             </v-sheet>
+
+<!-- Edit button Dialogue Box -->
+<v-dialog v-model="dialog" max-width="500">
+  <v-card>
+    <v-container>
+      <v-form @submit.prevent="addEvent">
+        <v-text-field
+          v-model="name"
+          type="text"
+          label="event name (required)"
+        >
+        </v-text-field>
+        <v-text-field
+          v-model="details"
+          type="text"
+          label="detail"
+        >
+        </v-text-field>
+        <v-text-field
+          v-model="start"
+          type="date"
+          label="start (required)"
+        >
+        </v-text-field>
+        <v-text-field
+          v-model="end"
+          type="date"
+          label="end (required)"
+        >
+        </v-text-field>
+        <v-text-field
+          v-model="color"
+          type="color"
+          label="color (click to open color menu)"
+        >
+        </v-text-field>
+        <v-btn
+          type="submit"
+          color="primary"
+          class="mr-4"
+          @click.stop="dialog = false"
+        >
+          create event
+        </v-btn>
+      </v-form>
+    </v-container>
+  </v-card>
+</v-dialog>
+
 
     <!-- ================== Side Bar ===================== -->
     <v-navigation-drawer
@@ -88,7 +144,7 @@
           <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
         </v-list-item-avatar> -->
         <v-list-item-content>
-          <v-list-item-title>Side Bar</v-list-item-title>
+          <v-list-item-title>Menu</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
@@ -107,13 +163,27 @@
           <v-list-item-content>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
-
         </v-list-item>
-
       </v-list>
     </v-navigation-drawer>
     <!-- ================End of Side Bar==================== -->
-
+    <v-dialog v-model="dialog" max-width="500">
+        <v-card>
+          <v-container>
+            <v-form @submit.prevent="addEvent">
+              <v-text-field v-model="name" type="text" label="event name (required)"></v-text-field>
+              <v-text-field v-model="details" type="text" label="detail"></v-text-field>
+              <v-text-field v-model="start" type="date" label="start (required)"></v-text-field>
+              <v-text-field v-model="end" type="date" label="end (required)"></v-text-field>
+              <v-text-field v-model="color" type="color" label="color (click to open color menu)"></v-text-field>
+              <v-btn type="submit" color="primary" class="mr-4" @click.stop="dialog = false">
+                create event
+              </v-btn>
+            </v-form>
+          </v-container>
+        </v-card>
+      </v-dialog>
+    
     <!-- The Calendar itself  -->
       <v-sheet height="500">
         <v-calendar
@@ -127,9 +197,55 @@
           @click:more="viewDay"
           @click:date="viewDay"
           @change="updateRange"
-
         ></v-calendar>
-        <v-menu
+
+<!-- Delete button to the tool bar -->
+<v-menu
+          v-model="selectedOpen"
+          :close-on-content-click="false"
+          :activator="selectedElement"
+          full-width
+          offset-x
+        >
+<v-card color="grey lighten-4" :width="350" flat>
+  <v-toolbar :color="selectedEvent.color" dark>
+    <v-btn @click="deleteEvent(selectedEvent.id)" icon>
+      <v-icon>mdi-delete</v-icon>
+    </v-btn>
+    <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+    <div class="flex-grow-1"></div>
+  </v-toolbar>
+<v-card-text>
+    <form v-if="currentlyEditing !== selectedEvent.id">
+      {{ selectedEvent.details }}
+    </form>
+    <form v-else>
+      <textarea-autosize
+        v-model="selectedEvent.details"
+        type="text"
+        style="width: 100%"
+        :min-height="100"
+        placeholder="add note">
+      </textarea-autosize>
+    </form>
+  </v-card-text>
+
+<v-card-actions>
+    <v-btn text color="secondary" @click="selectedOpen = false">
+      close
+    </v-btn>
+    <v-btn v-if="currentlyEditing !== selectedEvent.id" text @click.prevent="editEvent(selectedEvent)">
+      edit
+    </v-btn>
+    <v-btn text v-else type="submit" @click.prevent="updateEvent(selectedEvent)">
+      Save
+    </v-btn>
+  </v-card-actions>
+</v-card>
+</v-menu>
+
+
+<!-- <v-menu
           v-model="selectedOpen"
           :close-on-content-click="false"
           :activator="selectedElement"
@@ -169,13 +285,21 @@
               </v-btn>
             </v-card-actions>
           </v-card>
-        </v-menu>
+        </v-menu>         -->
+
       </v-sheet>
     </v-col>
   </v-row>
 </template>
 
+
+
 <script>
+import TutorialServices from "../services/tutorialServices";
+import LessonServices from "../services/lessonServices";
+import CourseServices from "../services/courseServices";
+
+
   export default {
     data: () => ({
         focus: '',
@@ -281,5 +405,31 @@ names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference'
     //     return Math.floor((b - a + 1) * Math.random()) + a
     //   },
     },
+    retrieveCourse() {
+      CourseServices.get(this.courseid)
+        .then(response => {
+          this.course= response.data;
+        })
+        .catch(e => {
+          this.message = e.response.data.message;
+        });
+
+    },
+    retrieveLessons() {
+      TutorialServices.get(this.id)
+      .then(response => {
+        this.tutorial = response.data;
+        LessonServices.getAllLessons(this.id)
+        .then(response => {
+          this.lessons = response.data
+        })
+        .catch(e => {
+            this.message = e.response.data.message;
+        });
+      })
+      .catch(e => {
+        this.message = e.response.data.message;
+      });
+}
   }
 </script>

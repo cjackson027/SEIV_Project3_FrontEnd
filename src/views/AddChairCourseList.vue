@@ -31,16 +31,23 @@
         ></v-text-field>
         <v-text-field
           v-model="course.coursename"
-          id="coursename"
+          id="courseName"
           :counter="50"
           label="Course Name"
           required
         ></v-text-field>
         <v-text-field
           v-model="course.coursehour"
-          id="coursehour"
+          id="courseHour"
           :counter="50"
           label="Course Hour"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="course.coursehour"
+          id="courseLevel"
+          :counter="50"
+          label="Course Level"
           required
         ></v-text-field>
         <v-text-field
@@ -108,6 +115,7 @@ export default {
         coursenumber: "",
         coursename: "",
         coursehour: "",
+        courselevel: "",
         courserestrict: "",
         courseyearly: "",
         coursesession: "",

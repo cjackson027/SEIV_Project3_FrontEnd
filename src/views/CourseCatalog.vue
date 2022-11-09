@@ -75,14 +75,15 @@
         title: "",
         user: {},
         message : "View Current Courses",
-        headers: [{text: 'courseId', value: 'courseid'},
-                  {text: 'courseNumber', value: 'coursenumber'},
-                  {text: 'courseName', value: 'coursename'},
-                  {text: 'courseHour', value: 'coursehour'},
-                  {text: 'courseRestrict', value: 'courserestrict'},
-                  {text: 'courseYearly', value: 'courseyearly'},
-                  {text: 'courseSession', value: 'coursesession'},
-                  {text: 'courseDescription', value: 'coursedescription'},],
+        headers: [{text: 'courseId', value: 'id'},
+                  {text: 'courseNumber', value: 'courseNumber'},
+                  {text: 'courseName', value: 'courseName'},
+                  {text: 'courseHour', value: 'courseHour'},
+                  {text: 'courseLevel', value: 'courseLevel'},
+                  {text: 'courseRestrict', value: 'courseRestrict'},
+                  {text: 'courseYearly', value: 'courseYearly'},
+                  {text: 'courseSession', value: 'courseSession'},
+                  {text: 'courseDescription', value: 'courseDescription'},],
         };
     },
     mounted() {
@@ -94,7 +95,7 @@
     //     this.$router.push({ name: 'editcourse', params: { id: course.courseId } });
     //   },
         viewCourseInfo(course) {
-          this.$router.push({ name: 'viewCourse', params: { id: course.courseid } });
+          this.$router.push({ name: 'viewCourse', params: { id: course.id } });
         },
     //   deleteCourse(course) {
     //     CourseServices.delete(course.courseId)

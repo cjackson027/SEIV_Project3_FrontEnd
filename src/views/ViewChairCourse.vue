@@ -68,7 +68,7 @@
         course: {},
         sections : [],
         message: "Add, Edit or Delete Sections",
-        headers: [{text: 'courseId', value: 'courseid'},
+        headers: [{text: 'courseId', value: 'id'},
                   {text: 'sectionId', value: 'sectionid'},
                   {text: 'startDate', value: 'startdate'},
                   {text: 'endDate', value: 'enddate'},

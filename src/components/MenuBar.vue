@@ -3,7 +3,7 @@
         <v-app-bar
             app
         >
-        <router-link :to="{ name: 'tutorials' }">
+        <router-link :to="{ name: 'courses' }">
             <v-img
                 class="mx-2"
                 src="../assets/oc-logo-white.png"
@@ -17,7 +17,7 @@
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items v-if="user != null">
-                <v-btn 
+                <!-- <v-btn 
                     exact
                     :to="{ name: 'tutorials' }"
                     text
@@ -30,7 +30,7 @@
                     text
                 >
                     Add Tutorial
-                </v-btn>
+                </v-btn> -->
             </v-toolbar-items>
             <v-menu
                 bottom

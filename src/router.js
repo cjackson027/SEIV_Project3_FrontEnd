@@ -10,9 +10,13 @@ import ViewTutorial from "./views/ViewTutorial.vue"
 import AddLesson from "./views/AddLesson.vue"
 import EditLesson from "./views/EditLesson.vue"
 import CourseCatalog from "./views/CourseCatalog.vue"
+import ViewCourse from "./views/ViewCourse.vue"
 import ChairCourseList from "./views/ChairCourseList.vue"
+import ViewChairCourse from "./views/ViewChairCourse.vue"
 import EditChairCourseList from "./views/EditChairCourseList.vue"
 import AddChairCourseList from "./views/AddChairCourseList.vue"
+import AddSection from "./views/AddSection.vue"
+import EditSection from "./views/EditSection.vue"
 
 Vue.use(Router)
 
@@ -68,9 +72,21 @@ const router =  new Router({
       component: CourseCatalog
     },
     {
+      path: "/viewcourse/:id",
+      name: "viewcourse",
+      component: ViewCourse,
+      props: true
+    },
+    {
       path: "/courselists",
       name: "courselists",
       component: ChairCourseList
+    },
+    {
+      path: "/viewchaircourse/:courseId",
+      name: "viewchaircourse",
+      component: ViewChairCourse,
+      props: true
     },
     {
       path: "/editcourses/:id",
@@ -83,6 +99,19 @@ const router =  new Router({
       name: "addcourse",
       component: AddChairCourseList
     },
+    {
+      path: "/addSection/:courseId",
+      name: "addSection",
+      component: AddSection,
+      props: true
+    },
+    {
+      path: "/editSection/:courseId/:sectionId",
+      name: "editSection",
+      component: EditSection,
+      props: true
+    },
+
   ]
 })
 

@@ -2,12 +2,12 @@ import apiClient from "@/services/services.js";
 
 export default {
   loginUser(user) {
-    return apiClient.post("tutorials/login", user);
+    return apiClient.post("catalogs/login", user);
   },
   authorizeUser(code) {
-    return apiClient.post("tutorials/authorize", code);
+    return apiClient.post("catalogs/authorize", code);
   },
   logoutUser(token) {
-    return apiClient.post("tutorials/logout", token);
+    return apiClient.post("catalogs/logout", token);
   }
 };

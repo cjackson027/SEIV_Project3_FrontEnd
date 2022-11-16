@@ -3,8 +3,8 @@
     <v-container>
       <v-toolbar>
         <v-toolbar-title>Hello!</v-toolbar-title>
-        <!-- <v-spacer></v-spacer>
-        <v-toolbar-title>{{this.message}}</v-toolbar-title> -->
+        <v-spacer></v-spacer>
+        <v-toolbar-title>{{this.message}}</v-toolbar-title>
       </v-toolbar>
       <br><br>
       <v-card>
@@ -18,6 +18,7 @@
               single-line
               hide-details
           ></v-text-field>
+          <v-btn class="mx-2" color="primary" @click="addCourse()">Add Course</v-btn>
         </v-card-title>
         <v-card-text>
           <b>{{ message }}</b>
@@ -33,16 +34,16 @@
           <v-icon
             small
             class="mx-4"
-            @click="editCourse(item)"
+            @click="viewCourse(item)"
           >
-            mdi-pencil
+            mdi-format-list-bulleted-type
           </v-icon>
           <v-icon
             small
             class="mx-4"
-            @click="viewCourse(item)"
+            @click="editCourse(item)"
           >
-            mdi-format-list-bulleted-type
+            mdi-pencil
           </v-icon>
           <v-icon
             small
@@ -73,15 +74,17 @@ export default {
       currentIndex: -1,
       title: "",
       user: {},
-      message : "Search, Edit or Delete Courses",
-      headers: [{text: 'courseId', value: 'courseid'},
-                {text: 'courseNumber', value: 'coursenumber'},
-                {text: 'courseName', value: 'coursename'},
-                {text: 'courseHour', value: 'coursehour'},
-                {text: 'courseRestrict', value: 'courserestrict'},
-                {text: 'courseYearly', value: 'courseyearly'},
-                {text: 'courseSession', value: 'coursesession'},
-                {text: 'courseDescription', value: 'coursedescription'},],
+      message : "Search, Add, Edit or Delete Courses",
+      headers: [//{text: 'Id', value: 'id'},
+                  {text: 'Number', value: 'courseNumber'},
+                  {text: 'Name', value: 'courseName'},
+                  {text: 'Hour', value: 'courseHour'},
+                  {text: 'Level', value: 'courseLevel'},
+                  {text: 'Restrict', value: 'courseRestrict'},
+                  {text: 'Yearly', value: 'courseYearly'},
+                  {text: 'Session', value: 'courseSession'},
+                  {text: 'Description', value: 'courseDescription'},
+                  {text: 'Actions', value: 'actions', sortable: false },],
       };
   },
   mounted() {
@@ -90,13 +93,16 @@ export default {
   },
   methods: {
     editCourse(course) {
-      this.$router.push({ name: 'editcourse', params: { id: course.courseId } });
+      this.$router.push({ name: 'editcourse', params: { id: course.id } });
     },
-    // viewCourse(tutorial) {
-    //   this.$router.push({ name: 'view', params: { id: tutorial.id } });
-    // },
+    addCourse() {
+      this.$router.push({ name: 'addcourse' });
+    },
+    viewCourse(course) {
+      this.$router.push({ name: 'viewchaircourse', params: { id: course.id } });
+    },
     deleteCourse(course) {
-      CourseServices.delete(course.courseId)
+      CourseServices.delete(course.id)
         .then( () => {
           this.retrieveCourses()
         })

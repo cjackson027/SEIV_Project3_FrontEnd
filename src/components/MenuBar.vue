@@ -3,7 +3,7 @@
         <v-app-bar
             app
         >
-        <router-link :to="{ name: 'tutorials' }">
+        <router-link :to="{ name: 'calendar' }">
             <v-img
                 class="mx-2"
                 src="../assets/oc-logo-white.png"
@@ -16,20 +16,27 @@
                 <div>{{ this.title }}</div>    
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-toolbar-items v-if="user != null">
+            <v-toolbar-items v-if="user == null">
                 <v-btn 
                     exact
-                    :to="{ name: 'tutorials' }"
+                    :to="{ name: 'viewoffice' }"
                     text
                 >
-                    List
+                    Office Hours
                 </v-btn>
                 <v-btn 
                     exact
-                    :to="{ name: 'add' }"
+                    :to="{ name: 'courselists' }"
                     text
                 >
-                    Add Tutorial
+                    Chair List
+                </v-btn>
+                <v-btn 
+                    exact
+                    :to="{ name: 'courses' }"
+                    text
+                >
+                    Course Catalog
                 </v-btn>
             </v-toolbar-items>
             <v-menu
@@ -92,7 +99,7 @@ export default {
     name: 'App',
     data: () => ({
         user: {},
-        title: 'Tutorials',
+        title: 'Schedule',
         initials: '',
         name: '',
     }),

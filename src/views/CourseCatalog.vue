@@ -1,5 +1,32 @@
 <template>
     <div>
+      <VueHtml2pdf
+    :show-layout="false"
+    :float-layout="true"
+    :enable-download="true"
+    :preview-modal="true" 
+    :paginate-elements-by-height="1400"
+    filename=myPDF
+    :pdf-quality="2"
+    :manual-pagination="false"
+    pdf-format="a4"
+    pdf-orientation="landscape"
+    pdf-content-width="800px"
+    ref="html2Pdf"
+>
+    <section slot="pdf-content">
+     <li v-for="(course, index) in courses" :key="index">
+       {{ course.courseNumber }} - {{ course.courseName }}
+     </li>
+    </section>
+</VueHtml2pdf>
+    <v-btn
+    color="error"
+    class="mr-4"
+    @click="generateReport()"
+  >
+    Generate PDF
+  </v-btn>
       <v-container>
         <v-toolbar>
           <v-toolbar-title>Hello!</v-toolbar-title>
@@ -48,7 +75,8 @@
   <script>
   import CourseServices from "../services/courseServices";
   import Utils from '@/config/utils.js'
-  
+  import VueHtml2pdf from 'vue-html2pdf'
+
   export default {
     name: "courses-list",
     data() {
@@ -76,6 +104,9 @@
       this.user = Utils.getStore('user');
       this.retrieveCourses();
     },
+    components: {
+      VueHtml2pdf
+    },
     methods: {
         viewCourseInfo(course) {
           this.$router.push({ name: 'viewcourse', params: { id: course.id } });
@@ -98,6 +129,10 @@
         this.currentCourse = course;
         this.currentIndex = course ? index : -1;
       },  
+      generateReport () {
+          this.$refs.html2Pdf.generatePdf()
+      }
+  
     }
   };
   </script>

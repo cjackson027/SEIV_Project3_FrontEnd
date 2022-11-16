@@ -17,6 +17,9 @@ import EditChairCourseList from "./views/EditChairCourseList.vue"
 import AddChairCourseList from "./views/AddChairCourseList.vue"
 import AddSection from "./views/AddSection.vue"
 import EditSection from "./views/EditSection.vue"
+import ViewOfficeHours from "./views/ViewOfficeHours.vue"
+import EditOfficeHours from "./views/EditOfficeHours.vue"
+import AddOfficeHours from "./views/AddOfficeHours.vue"
 
 Vue.use(Router)
 
@@ -111,7 +114,24 @@ const router =  new Router({
       component: EditSection,
       props: true
     },
-
+    {
+      path: "/viewoffice",
+      name: "viewoffice",
+      component: ViewOfficeHours,
+      props: true
+    },
+    {
+      path: "/addoffice/:id",
+      name: "addoffice",
+      component: AddOfficeHours,
+      props: true
+    },
+    {
+      path: "/editoffices/:id",
+      name: "editoffice",
+      component: EditOfficeHours,
+      props: true
+    }
   ]
 })
 

@@ -9,7 +9,7 @@
         <br>
         <h4>{{ message }}</h4>
         <br>
-        <h4>Office Hour: {{officelId}}</h4>
+        <h4>{{userId}}</h4>
         <br>
         <v-form 
           ref="form" 
@@ -38,6 +38,14 @@
              label="End Time"
              required
           ></v-text-field>
+
+          <v-text-field
+             v-model="office.semesterId"
+             id="semesterId"
+             :counter="50"
+             label="Semester Id"
+             required
+          ></v-text-field>
   
           <v-btn
             :disabled="!valid"
@@ -64,7 +72,7 @@
   import OfficeServices from "../services/officeServices";
   export default {
     name: "add-office",
-    props: ['userId', 'semesterId'],
+    props: ['userId'],
     data() {
       return {
         valid: true,
@@ -85,18 +93,18 @@
           userId : this.userId,
           semesterId : this.semesterId
         };
-        OfficeServices.createOffice(this.userId, this.semesterId, data)
+        OfficeServices.createOffice(this.userId, data)
           .then(response => {
-            this.office.officeId = response.data.id;
+            this.userId = response.data.id;
           
-            this.$router.push({ name: 'view' , params: { userId: this.userId, semesterId: this.semesterId }} );
+            this.$router.push({ name: 'viewofficehours' , params: { userId: this.userId}} );
           })
           .catch(e => {
             this.message = e.response.data.message;
           });
       },
       cancel(){
-          this.$router.push({ name: 'view' , params: { userId: this.userId, semesterId: this.semesterId }} );
+          this.$router.push({ name: 'viewofficehours' , params: { userId: this.userId}} );
       }
     }
   }

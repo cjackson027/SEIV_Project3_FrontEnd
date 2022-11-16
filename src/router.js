@@ -13,8 +13,9 @@ import CourseCatalog from "./views/CourseCatalog.vue"
 import ChairCourseList from "./views/ChairCourseList.vue"
 import EditChairCourseList from "./views/EditChairCourseList.vue"
 import AddChairCourseList from "./views/AddChairCourseList.vue"
+import ViewOfficeHours from "./views/ViewOfficeHours.vue"
+import EditOfficeHours from "./views/EditOfficeHours.vue"
 import AddOfficeHours from "./views/AddOfficeHours.vue"
-
 Vue.use(Router)
 
 const router =  new Router({
@@ -85,14 +86,21 @@ const router =  new Router({
       component: AddChairCourseList
     },
     {
-      path: "/addoffice",
+      path: "/viewoffice/:id",
+      name: "viewoffice",
+      component: ViewOfficeHours,
+      props: true
+    },
+    {
+      path: "/addoffice/:id",
       name: "addoffice",
-      component: AddOfficeHours
+      component: AddOfficeHours,
+      props: true
     },
     {
       path: "/editoffices/:id",
       name: "editoffice",
-      component: EditChairCourseList,
+      component: EditOfficeHours,
       props: true
     }
   

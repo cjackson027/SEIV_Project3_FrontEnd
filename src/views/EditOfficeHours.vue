@@ -65,7 +65,7 @@
   
   export default {
     name: "edit-office",
-    props: [ 'userId' , 'semesterId', 'officeId' ],
+    props: [ 'id' ],
     data() {
       return {
         valid: false,
@@ -75,9 +75,9 @@
     },
     methods: {
       retrieveOfficeHours() {
-        OfficeServices.getOfficeHours(this.userId, this.semesterId, this.officeId)
+        OfficeServices.get(this.id)
           .then(response => {
-            this.office= response.data;
+            this.office = response.data;
           })
           .catch(e => {
             this.message = e.response.data.message;
@@ -86,24 +86,25 @@
       },
       saveOfficeHours() {
         var data = {
+          officeId: this.id,
           weekDay: this.office.officeWeekDay,
           startTime: this.office.officeStartTime,
-          startTime: this.office.officeStartTime,
-          userId : this.userId,
-          semesterId : this.semesterId
+          EndTime: this.office.officeEndTime,
+          userId : this.office.userId,
+          semesterId : this.office.semesterId
         };
-        OfficeServices.updateOfficeHours(this.office.userId, this.office.semesterId, this.office.id, data)
+        OfficeServices.updateOfficeHours(this.id, data)
           .then(response => {
-            this.office.id = response.data.id;
+            this.id = response.data.id;
           
-           this.$router.push({ name: 'view' , params: { userId: this.office.userId, semesterId: this.office.semesterId }} );
+           this.$router.push({ name: 'viewofficehours' , params: { userId: this.office.userId}} );
           })
           .catch(e => {
             this.message = e.response.data.message;
           });
       },
       cancel(){
-          this.$router.push({ name: 'view' , params: { userId: this.office.userId, semesterId: this.office.semesterId }} );
+          this.$router.push({ name: 'viewofficehours' , params: { userId: this.office.userId}} );
       }
     },
       mounted() {

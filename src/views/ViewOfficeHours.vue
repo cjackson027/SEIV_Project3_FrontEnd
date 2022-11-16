@@ -3,13 +3,13 @@
       <v-container>
         <v-toolbar>
           <v-toolbar-title>Hello!</v-toolbar-title>
-          <!-- <v-spacer></v-spacer>
-          <v-toolbar-title>{{this.message}}</v-toolbar-title> -->
+          <v-spacer></v-spacer>
+          <v-toolbar-title>{{this.message}}</v-toolbar-title>
         </v-toolbar>
         <br><br>
         <v-card>
           <v-card-title>
-            Tutorials
+            Office Hours
             <v-spacer></v-spacer>
             <v-text-field
                 v-model="search"
@@ -18,6 +18,7 @@
                 single-line
                 hide-details
             ></v-text-field>
+            <v-btn class="mx-2" color="primary" @click="addOfficeHours()">Add OfficeHours</v-btn>
           </v-card-title>
           <v-card-text>
             <b>{{ message }}</b>
@@ -25,7 +26,7 @@
           <v-data-table
             :headers="headers"
             :search="search"
-            :items="tutorials"
+            :items="officehours"
             :items-per-page="50"
           >
           <template v-slot:[`item.actions`]="{ item }">  
@@ -33,21 +34,14 @@
             <v-icon
               small
               class="mx-4"
-              @click="editTutorial(item)"
+              @click="editOfficeHours(item)"
             >
               mdi-pencil
             </v-icon>
             <v-icon
               small
               class="mx-4"
-              @click="viewTutorial(item)"
-            >
-              mdi-format-list-bulleted-type
-            </v-icon>
-            <v-icon
-              small
-              class="mx-4"
-              @click="deleteTutorial(item)"
+              @click="deleteOfficeHours(item)"
             >
             mdi-trash-can
             </v-icon>
@@ -73,27 +67,28 @@
         currentIndex: -1,
         title: "",
         user: {},
-        message : "Search, Edit or Delete Tutorials",
-        headers: [{text: 'SectionId', value: 'sectionId'},
-                  {text: 'OfficeId', value: 'officeId'},
-                  {text: 'WeekDay', value: 'weekDay'}, 
-                  {text: 'StartTime', value: 'startTime'},
-                  {text: 'EndTime', value: 'endTime'},],
+        message : "Search, Edit or Delete Office Hours",
+        headers: [{text: 'OfficeId', value: 'id'},
+                  {text: 'SemesterId', value: 'semesterId'},
+                  {text: 'WeekDay', value: 'officeWeekDay'}, 
+                  {text: 'StartTime', value: 'officeStartTime'},
+                  {text: 'EndTime', value: 'officeEndTime'},
+                  {text: 'Actions', value: 'actions', sortable: false },],
       };
     },
     mounted() {
       this.user = Utils.getStore('user');
-      this.retrieveTutorials();
+      this.retrieveOfficeHours();
     },
     methods: {
-      editTutorial(tutorial) {
-        this.$router.push({ name: 'edit', params: { id: tutorial.id } });
+      editOfficeHours(officehour) {
+        this.$router.push({ name: 'editoffice', params: { id: officehour.id } });
       },
-      viewTutorial(tutorial) {
-        this.$router.push({ name: 'view', params: { id: tutorial.id } });
+      addOfficeHours() {
+      this.$router.push({ name: 'addoffice', params: { id: this.user.userId } });
       },
-      deleteTutorial(tutorial) {
-        OfficeServices.delete(tutorial.id)
+      deleteOfficeHours(officehour) {
+        OfficeServices.delete(officehour.id)
           .then( () => {
             this.retrieveTutorials()
           })
@@ -101,25 +96,25 @@
             this.message = e.response.data.message;
           });
       },
-      retrieveTutorials() {
+      retrieveOfficeHours() {
         OfficeServices.getAllForUser(this.user.userId)
           .then(response => {
-            this.tutorials = response.data;
+            this.officeHours = response.data;
           })
           .catch(e => {
             this.message = e.response.data.message;
           });
       },
       refreshList() {
-        this.retrieveTutorials();
-        this.currentTutorial = null;
+        this.retrieveOfficeHours();
+        this.currentHours = null;
         this.currentIndex = -1;
       },
-      setActiveTutorial(tutorial, index) {
-        this.currentTutorial = tutorial;
-        this.currentIndex = tutorial ? index : -1;
+      setActiveTutorial(OfficeHour, index) {
+        this.currentHours = OfficeHour;
+        this.currentIndex = OfficeHour ? index : -1;
       },
-      removeAllTutorials() {
+      removeAllOfficeHours() {
         OfficeServices.deleteAll()
           .then(response => {
             console.log(response.data);

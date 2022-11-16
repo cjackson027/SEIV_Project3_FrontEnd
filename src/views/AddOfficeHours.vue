@@ -2,7 +2,7 @@
     <div>
       <v-container>
         <v-toolbar>
-          <v-toolbar-title>Office Hours Edit</v-toolbar-title>
+          <v-toolbar-title>Office Hours Add</v-toolbar-title>
           <!-- <v-spacer></v-spacer>
           <v-toolbar-title>{{this.message}}</v-toolbar-title> -->
         </v-toolbar>
@@ -81,7 +81,7 @@
         var data = {
           weekDay: this.office.officeWeekDay,
           startTime: this.office.officeStartTime,
-          startTime: this.office.officeStartTime,
+          endTime: this.office.officeEndTime,
           userId : this.userId,
           semesterId : this.semesterId
         };

@@ -15,7 +15,9 @@
        ref="html2Pdf"
    >
        <section slot="pdf-content">
-          {{retrieveTutorials()}}
+        <li v-for="(tutorial, index) in tutorials" :key="index">
+          {{ tutorial }}
+        </li>
        </section>
    </VueHtml2pdf>
     <v-container>
@@ -136,6 +138,7 @@ export default {
       TutorialServices.getAllForUser(this.user.userId)
         .then(response => {
           this.tutorials = response.data;
+
         })
         .catch(e => {
           this.message = e.response.data.message;
@@ -160,11 +163,12 @@ export default {
           this.message = e.response.data.message;
         });
     },
-
+    hello(){
+      'hello'
+    },
     generateReport () {
             this.$refs.html2Pdf.generatePdf()
         }
-    
   }
 };
 </script>

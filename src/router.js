@@ -86,7 +86,7 @@ const router =  new Router({
       component: AddChairCourseList
     },
     {
-      path: "/viewoffice/:id",
+      path: "/viewoffice",
       name: "viewoffice",
       component: ViewOfficeHours,
       props: true

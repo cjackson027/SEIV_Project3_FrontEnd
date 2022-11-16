@@ -3,7 +3,7 @@ module.exports = {
     host: 'localhost',
     port: 8081
   },
-  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/tutorial-frontend-vue2/',
+  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/project3/2022/t4/',
   transpileDependencies: ['vuetify'],
 }
 

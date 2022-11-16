@@ -75,7 +75,7 @@ export default {
       title: "",
       user: {},
       message : "Search, Add, Edit or Delete Courses",
-      headers: [{text: 'Id', value: 'id'},
+      headers: [//{text: 'Id', value: 'id'},
                   {text: 'Number', value: 'courseNumber'},
                   {text: 'Name', value: 'courseName'},
                   {text: 'Hour', value: 'courseHour'},

@@ -120,7 +120,7 @@ export default {
 
     updateCourse() {
       var data = {
-        courseId: this.course.id,
+        courseId: this.id,
         courseNumber: this.course.courseNumber,
         courseName: this.course.courseName,
         courseHour: this.course.courseHour,

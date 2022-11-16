@@ -67,8 +67,9 @@
         search: '',
         course: {},
         sections : [],
+        courseId: 'id',
         message: "Add, Edit or Delete Sections",
-        headers: [{text: 'sectionId', value: 'id'},
+        headers: [//{text: 'sectionId', value: 'id'},
                   {text: 'weekDay', value: 'sectionWeekDay'},
                   {text: 'startDate', value: 'sectionStartDate'},
                   {text: 'endDate', value: 'sectionEndDate'},
@@ -97,17 +98,14 @@
           this.message = e.response.data.message;
         });
       },
-      editCourse() {
-        this.$router.push({ name: 'editCourse', params: { id: this.id } });
-      },
       editSection(section) {
-        this.$router.push({ name: 'editSection', params: { id: this.id, sectionId: section.sectionId} });
+        this.$router.push({ name: 'editSection', params: { id: this.id, sectionId: section.id} });
       },
       addSection() {
         this.$router.push({ name: 'addSection', params: { id: this.id } });
       },
       deleteSection(section) {
-        SectionServices.deleteSection(this.id,section.sectionId)
+        SectionServices.deleteSection(this.id,section.id)
           .then( () => {
             this.retrieveSections()
           })

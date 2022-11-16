@@ -67,7 +67,7 @@
         <v-text-field
           v-model="course.courseDescription"
           id="courseDescription"
-          :counter="250"
+          :counter="300"
           label="Course Description"
           required
         ></v-text-field>

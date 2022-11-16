@@ -92,7 +92,6 @@
           sectionEndDate: "",
           sectionStartTime: "",
           sectionEndTime: "",
-          // courseId: this.id,
         },
         message: "Enter data and click save"
       };
@@ -100,11 +99,11 @@
     methods: {
       saveSection() {
         var data = {
-            weekDay: this.section.sectionWeekDay,
-            startDate: this.section.sectionStartDate,
-            endDate: this.section.sectionEndDate,
-            startTime : this.section.sectionStartTime,
-            endTime : this.section.sectionEndTime,
+            sectionWeekDay: this.section.sectionWeekDay,
+            sectionStartDate: this.section.sectionStartDate,
+            sectionEndDate: this.section.sectionEndDate,
+            sectionStartTime : this.section.sectionStartTime,
+            sectionEndTime : this.section.sectionEndTime,
             courseId : this.id,
         };
         SectionServices.createSection(this.id, data)

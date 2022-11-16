@@ -9,7 +9,7 @@
         <br>
         <h4>{{ message }}</h4>
         <br>
-        <h4>Course: {{courseId}} Section: {{sectionId}}</h4>
+        <h4>Course: {{id}} Section: {{sectionId}}</h4>
         <br>
         <v-form 
           ref="form" 
@@ -83,7 +83,7 @@
   
   export default {
     name: "edit-section",
-    props: [ 'courseId' , 'sectionId' ],
+    props: [ 'id' , 'sectionId' ],
     data() {
       return {
         valid: false,
@@ -99,7 +99,7 @@
     },
     methods: {
       retrieveSection() {
-        SectionServices.getSection(this.courseId, this.sectionId)
+        SectionServices.getSection(this.id, this.sectionId)
           .then(response => {
             this.section= response.data;
           })
@@ -110,25 +110,26 @@
       },
       saveSection() {
         var data = {
-            weekDay: this.section.sectionWeekDay,
-            startDate: this.section.startDate,
-            endDate: this.section.endDate,
-            startTime : this.section.startTime,
-            endTime : this.section.endTime,
-            courseId : this.section.courseId,
+            id: this.sectionId,
+            sectionWeekDay: this.section.sectionWeekDay,
+            sectionStartDate: this.section.sectionStartDate,
+            sectionEndDate: this.section.sectionEndDate,
+            sectionStartTime : this.section.sectionStartTime,
+            sectionEndTime : this.section.sectionEndTime,
+            courseId: this.id
         };
-        SectionServices.updateSection(this.section.courseId,this.section.sectionId, data)
+        SectionServices.updateSection(this.id,this.sectionId, data)
           .then(response => {
             this.section.sectionId = response.data.id;
           
-           this.$router.push({ name: 'viewchaircourse' , params: { id: this.section.courseId }} );
+           this.$router.push({ name: 'viewchaircourse' , params: { id: this.id }} );
           })
           .catch(e => {
             this.message = e.response.data.message;
           });
       },
       cancel(){
-          this.$router.push({ name: 'viewchaircourse' , params: { id: this.section.courseId }} );
+          this.$router.push({ name: 'viewchaircourse' , params: { id: this.id }} );
       }
     },
       mounted() {

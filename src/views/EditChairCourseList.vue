@@ -14,59 +14,60 @@
         v-model="valid"
         lazy validation
       >
-      <v-text-field
-          v-model="course.courseid"
-          id="courseid"
-          :counter="50"
-          label="Course Id"
-          required
-        ></v-text-field>
+    
         <v-text-field
-          v-model="course.coursenumber"
-          id="coursenumber"
+          v-model="course.courseNumber"
+          id="courseNumber"
           :counter="50"
           label="Course Number"
           required
         ></v-text-field>
         <v-text-field
-          v-model="course.coursename"
-          id="coursename"
+          v-model="course.courseName"
+          id="courseName"
           :counter="50"
           label="Course Name"
           required
         ></v-text-field>
         <v-text-field
-          v-model="course.coursehour"
-          id="coursehour"
+          v-model="course.courseHour"
+          id="courseHour"
           :counter="50"
           label="Course Hour"
           required
         ></v-text-field>
         <v-text-field
-          v-model="course.courserestrict"
-          id="courserestrict"
+          v-model="course.courseLevel"
+          id="courseLevel"
+          :counter="50"
+          label="Course Level"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="course.courseRestrict"
+          id="courseRestrict"
           :counter="50"
           label="Course Restriction"
           required
         ></v-text-field>
         <v-text-field
-          v-model="course.courseyearly"
-          id="courseyearly"
+          v-model="course.courseYearly"
+          id="courseYearly"
           :counter="50"
           label="Course Yearly"
           required
         ></v-text-field>
         <v-text-field
-          v-model="course.coursesession"
-          id="coursesession"
+          v-model="course.courseSession"
+          id="courseSession"
           :counter="50"
           label="Course Session"
           required
         ></v-text-field>
         <v-text-field
-          v-model="course.coursedescription"
-          id="coursedescription"
-          :counter="50"
+          v-model="course.courseDescription"
+          id="courseDescription"
+          :counter="300"
           label="Course Description"
           required
         ></v-text-field>
@@ -107,7 +108,7 @@ export default {
   },
   methods: {
     retrieveCourse() {
-      CourseServices.get(this.courseid)
+      CourseServices.get(this.id)
         .then(response => {
           this.course= response.data;
         })
@@ -119,19 +120,20 @@ export default {
 
     updateCourse() {
       var data = {
-        courseId: this.course.courseid,
-        courseNumber: this.course.coursenumber,
-        courseName: this.course.coursename,
-        courseHour: this.course.coursehour,
-        courseRestrict: this.course.courserestrict,
-        courseYearly: this.course.courseyearly,
-        courseSession: this.course.coursesession,
-        courseDescription: this.course.description
+        courseId: this.course.id,
+        courseNumber: this.course.courseNumber,
+        courseName: this.course.courseName,
+        courseHour: this.course.courseHour,
+        courseLevel: this.course.courseLevel,
+        courseRestrict: this.course.courseRestrict,
+        courseYearly: this.course.courseYearly,
+        courseSession: this.course.courseSession,
+        courseDescription: this.course.courseDescription
 
       };
-      CourseServices.update(this.courseid,data)
+      CourseServices.update(this.id,data)
         .then(response => {
-          this.course.courseid = response.data.courseid;
+          this.course.id = response.data.id;
           this.$router.push({ name: 'courselists' });
         })
         .catch(e => {

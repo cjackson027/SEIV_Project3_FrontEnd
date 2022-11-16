@@ -3,25 +3,23 @@
       <v-container>
         <v-toolbar>
           <v-toolbar-title>Course View</v-toolbar-title>
-          <!-- <v-spacer></v-spacer>
-          <v-toolbar-title>{{this.message}}</v-toolbar-title> -->
+          <v-spacer></v-spacer>
+          <v-toolbar-title>{{this.message}}</v-toolbar-title>
         </v-toolbar>
         <br>
         <v-card>
           <v-card-title>
-            {{ course.coursename }}
+            {{ course.courseName }}
             <v-spacer></v-spacer>
-            <!-- <v-text-field
+            <v-text-field
                 v-model="search"
                 append-icon="mdi-magnify"
                 label="Search"
                 single-line
                 hide-details
                 class="mx-4"
-            ></v-text-field> -->
+            ></v-text-field>
             <v-btn class="mx-2" color="primary" @click="cancel()">Return</v-btn>
-            <!-- <v-btn class="mx-2" color="primary" @click="editCourse()">Course Edit</v-btn>
-            <v-btn class="mx-2" color="success" @click="addSection(id)">Add Section</v-btn> -->
           </v-card-title>
           <v-card-text>
             <b>{{ message }}</b>
@@ -29,10 +27,10 @@
           <v-data-table
             :headers="headers"
             :search="search"
-            :items="lessons"
+            :items="sections"
             :items-per-page="50"
           >
-          <!-- <template v-slot:[`item.actions`]="{ item }">  
+          <template v-slot:[`item.actions`]="{ item }">  
             <div>   
             <v-icon
               small
@@ -49,7 +47,7 @@
             mdi-trash-can
             </v-icon>
             </div> 
-          </template> -->
+          </template>
           </v-data-table>
         </v-card>
       </v-container>
@@ -68,12 +66,13 @@
         course: {},
         sections : [],
         message: "View Section Information",
-        headers: [{text: 'courseId', value: 'courseid'},
-                  {text: 'sectionId', value: 'sectionid'},
-                  {text: 'startDate', value: 'startdate'},
-                  {text: 'endDate', value: 'enddate'},
-                  {text: 'startTime', value: 'startime '},
-                  {text: 'endTime ', value: 'endtime '},],
+        headers: [
+                  //{text: 'sectionId', value: 'id'},
+                  {text: 'weekDay', value: 'sectionWeekDay'},
+                  {text: 'startDate', value: 'sectionStartDate'},
+                  {text: 'endDate', value: 'sectionEndDate'},
+                  {text: 'startTime', value: 'sectionStartTime'},
+                  {text: 'endTime ', value: 'sectionEndTime'},],
       };
     },
     mounted() {
@@ -96,24 +95,6 @@
           this.message = e.response.data.message;
         });
       },
-    //   editCourse() {
-    //     this.$router.push({ name: 'editCourse', params: { id: this.id } });
-    //   },
-    //   editSection(section) {
-    //     this.$router.push({ name: 'editSection', params: { courseId: this.id, sectionId: section.sectionId} });
-    //   },
-    //   addSection() {
-    //     this.$router.push({ name: 'addSection', params: { courseId: this.id } });
-    //   },
-    //   deleteSection(section) {
-    //     SectionServices.deleteSection(section.courseId,section.sectionId)
-    //       .then( () => {
-    //         this.retrieveSections()
-    //       })
-    //       .catch(e => {
-    //         this.message = e.response.data.message;
-    //       });
-    //   },
       cancel(){
           this.$router.push({ name: 'courses' });
       }

@@ -16,35 +16,44 @@
           v-model="valid"
           lazy validation
         >
-          <v-text-field
-            v-model="section.startDate"
-            id="startDate"
+
+        <v-text-field
+            v-model="section.sectionWeekDay"
+            id="sectionWeekDay"
             :counter="50"
-            label="StartDate"
+            label="Week Day"
             required
           ></v-text-field>
 
           <v-text-field
-            v-model="section.endDate"
-            id="endDate"
+            v-model="section.sectionStartDate"
+            id="sectionStartDate"
             :counter="50"
-            label="EndDate"
+            label="Start Date"
             required
           ></v-text-field>
 
           <v-text-field
-            v-model="section.startTime"
-            id="startTime"
+            v-model="section.sectionEndDate"
+            id="sectionEndDate"
             :counter="50"
-            label="StartTime"
+            label="End Date"
             required
           ></v-text-field>
 
           <v-text-field
-            v-model="section.endTime"
-            id="endTime"
+            v-model="section.sectionStartTime"
+            id="sectionStartTime"
             :counter="50"
-            label="EndTime"
+            label="Start Time"
+            required
+          ></v-text-field>
+
+          <v-text-field
+            v-model="section.sectionEndTime"
+            id="sectionEndTime"
+            :counter="50"
+            label="End Time"
             required
           ></v-text-field>
 
@@ -78,7 +87,13 @@
     data() {
       return {
         valid: false,
-        section: {},
+        section: {
+          sectionWeekDay: "",
+          sectionStartDate: "",
+          sectionEndDate: "",
+          sectionStartTime: "",
+          sectionEndTime: "",
+        },
         message: "Enter data and click save"
       };
     },
@@ -95,6 +110,7 @@
       },
       saveSection() {
         var data = {
+            weekDay: this.section.sectionWeekDay,
             startDate: this.section.startDate,
             endDate: this.section.endDate,
             startTime : this.section.startTime,

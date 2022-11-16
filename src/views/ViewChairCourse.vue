@@ -9,17 +9,17 @@
         <br>
         <v-card>
           <v-card-title>
-            {{ course.coursename }}
+            {{ course.courseName }}
             <v-spacer></v-spacer>
-            <!-- <v-text-field
+            <v-text-field
                 v-model="search"
                 append-icon="mdi-magnify"
                 label="Search"
                 single-line
                 hide-details
                 class="mx-4"
-            ></v-text-field> -->
-            <v-btn class="mx-2" color="primary" @click="editCourse()">Course Edit</v-btn>
+            ></v-text-field>
+            <!-- <v-btn class="mx-2" color="primary" @click="editCourse()">Course Edit</v-btn> -->
             <v-btn class="mx-2" color="success" @click="addSection(id)">Add Section</v-btn>
             <v-btn class="mx-2" color="success" @click="cancel()">Return</v-btn>
           </v-card-title>
@@ -68,12 +68,13 @@
         course: {},
         sections : [],
         message: "Add, Edit or Delete Sections",
-        headers: [{text: 'courseId', value: 'id'},
-                  {text: 'sectionId', value: 'sectionid'},
-                  {text: 'startDate', value: 'startdate'},
-                  {text: 'endDate', value: 'enddate'},
-                  {text: 'startTime', value: 'startime '},
-                  {text: 'endTime ', value: 'endtime '},],
+        headers: [{text: 'sectionId', value: 'id'},
+                  {text: 'weekDay', value: 'sectionWeekDay'},
+                  {text: 'startDate', value: 'sectionStartDate'},
+                  {text: 'endDate', value: 'sectionEndDate'},
+                  {text: 'startTime', value: 'sectionStartTime'},
+                  {text: 'endTime ', value: 'sectionEndTime'},
+                  {text: 'Actions', value: 'actions', sortable: false },],
       };
     },
     mounted() {
@@ -100,13 +101,13 @@
         this.$router.push({ name: 'editCourse', params: { id: this.id } });
       },
       editSection(section) {
-        this.$router.push({ name: 'editSection', params: { courseId: this.id, sectionId: section.sectionId} });
+        this.$router.push({ name: 'editSection', params: { id: this.id, sectionId: section.sectionId} });
       },
       addSection() {
-        this.$router.push({ name: 'addSection', params: { courseId: this.id } });
+        this.$router.push({ name: 'addSection', params: { id: this.id } });
       },
       deleteSection(section) {
-        SectionServices.deleteSection(section.courseId,section.sectionId)
+        SectionServices.deleteSection(this.id,section.sectionId)
           .then( () => {
             this.retrieveSections()
           })

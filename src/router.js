@@ -72,7 +72,7 @@ const router =  new Router({
       component: CourseCatalog
     },
     {
-      path: "/viewcourse/:courseId",
+      path: "/viewcourse/:id",
       name: "viewcourse",
       component: ViewCourse,
       props: true

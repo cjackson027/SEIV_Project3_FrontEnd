@@ -8,7 +8,7 @@ export default {
     return apiClient.get(`/courses/${courseId}/sections/${id}`);
   },
   createSection(courseId,data) {
-    return apiClient.post(`/courses/${courseId}/sections`, data);
+    return apiClient.post(`/courses/${courseId}/sections/`, data);
   },
   updateSection(courseId,id, data) {
     return apiClient.put(`/courses/${courseId}/sections/${id}`, data);

@@ -2,14 +2,14 @@
     <div>
       <v-container>
         <v-toolbar>
-          <v-toolbar-title>Section Edit</v-toolbar-title>
+          <v-toolbar-title>Section Add</v-toolbar-title>
           <!-- <v-spacer></v-spacer>
           <v-toolbar-title>{{this.message}}</v-toolbar-title> -->
         </v-toolbar>
         <br>
         <h4>{{ message }}</h4>
         <br>
-        <h4>Course: {{courseId}}</h4>
+        <h4>Course: {{id}}</h4>
         <br>
         <v-form 
           ref="form" 
@@ -17,34 +17,42 @@
           lazy validation
         >
         <v-text-field
-            v-model="section.startDate"
-            id="startDate"
+            v-model="section.sectionWeekDay"
+            id="sectionWeekDay"
             :counter="50"
-            label="StartDate"
+            label="Week Day"
+            required
+          ></v-text-field>
+          
+        <v-text-field
+            v-model="section.sectionStartDate"
+            id="sectionStartDate"
+            :counter="50"
+            label="Start Date"
             required
           ></v-text-field>
 
           <v-text-field
-            v-model="section.endDate"
-            id="endDate"
+            v-model="section.sectionEndDate"
+            id="sectionEndDate"
             :counter="50"
-            label="EndDate"
+            label="End Date"
             required
           ></v-text-field>
 
           <v-text-field
-            v-model="section.startTime"
-            id="startTime"
+            v-model="section.sectionStartTime"
+            id="sectionStartTime"
             :counter="50"
-            label="StartTime"
+            label="Start Time"
             required
           ></v-text-field>
 
           <v-text-field
-            v-model="section.endTime"
-            id="endTime"
+            v-model="section.sectionEndTime"
+            id="sectionEndTime"
             :counter="50"
-            label="EndTime"
+            label="End Time"
             required
           ></v-text-field>
 
@@ -74,16 +82,17 @@
 
   export default {
     name: "add-section",
-    props: ['courseId'],
+    props: ['id'],
     data() {
       return {
         valid: true,
         section: {
-          id: null,
-          startDate: "",
-          endDate: "",
-          startTime: "",
-          endTime: "",
+          sectionWeekDay: "",
+          sectionStartDate: "",
+          sectionEndDate: "",
+          sectionStartTime: "",
+          sectionEndTime: "",
+          // courseId: this.id,
         },
         message: "Enter data and click save"
       };
@@ -91,24 +100,25 @@
     methods: {
       saveSection() {
         var data = {
-            startDate: this.section.startDate,
-            endDate: this.section.endDate,
-            startTime : this.section.startTime,
-            endTime : this.section.endTime,
-            courseId : this.section.courseId,
+            weekDay: this.section.sectionWeekDay,
+            startDate: this.section.sectionStartDate,
+            endDate: this.section.sectionEndDate,
+            startTime : this.section.sectionStartTime,
+            endTime : this.section.sectionEndTime,
+            courseId : this.id,
         };
-        SectionServices.createSection(this.courseId, data)
+        SectionServices.createSection(this.id, data)
           .then(response => {
             this.section.sectionId = response.data.id;
           
-            this.$router.push({ name: 'viewchaircourse' , params: { id: this.courseId }} );
+            this.$router.push({ name: 'viewchaircourse' , params: { id: this.id }} );
           })
           .catch(e => {
             this.message = e.response.data.message;
           });
       },
       cancel(){
-          this.$router.push({ name: 'viewchaircourse' , params: { id: this.courseId }} );
+          this.$router.push({ name: 'viewchaircourse' , params: { id: this.id }} );
       }
     }
   }

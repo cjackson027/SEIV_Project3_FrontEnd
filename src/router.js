@@ -77,7 +77,6 @@ const router =  new Router({
       path: "/viewoffice",
       name: "viewoffice",
       component: ViewOfficeHours,
-      props: true
     },
     {
       path: "/addoffice/:id",

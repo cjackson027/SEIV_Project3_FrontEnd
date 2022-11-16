@@ -19,6 +19,13 @@
             <v-toolbar-items v-if="user == null">
                 <v-btn 
                     exact
+                    :to="{ name: 'viewoffice' }"
+                    text
+                >
+                    Office Hours
+                </v-btn>
+                <v-btn 
+                    exact
                     :to="{ name: 'courselists' }"
                     text
                 >

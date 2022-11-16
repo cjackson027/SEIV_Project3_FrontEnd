@@ -18,7 +18,7 @@
                 single-line
                 hide-details
             ></v-text-field>
-            <v-btn class="mx-2" color="primary" @click="addOfficeHours()">Add OfficeHours</v-btn>
+            <v-btn class="mx-2" color="primary" @click="addOfficeHours()">Add Office Hours</v-btn>
           </v-card-title>
           <v-card-text>
             <b>{{ message }}</b>

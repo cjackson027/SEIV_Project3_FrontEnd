@@ -18,6 +18,8 @@ import AddChairCourseList from "./views/AddChairCourseList.vue"
 import AddSection from "./views/AddSection.vue"
 import EditSection from "./views/EditSection.vue"
 
+//import Home from '@/components/Home.html'
+
 Vue.use(Router)
 
 const router =  new Router({
@@ -110,7 +112,12 @@ const router =  new Router({
       name: "editSection",
       component: EditSection,
       props: true
-    },
+    }
+
+   // { path: '/', 
+    //name: 'Home', 
+    //component: Home 
+    //}
 
   ]
 })

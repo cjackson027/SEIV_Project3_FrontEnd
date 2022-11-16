@@ -1,5 +1,23 @@
 <template>
   <div>
+    <VueHtml2pdf
+       :show-layout="false"
+       :float-layout="true"
+       :enable-download="true"
+       :preview-modal="true" 
+       :paginate-elements-by-height="1400"
+       filename=myPDF
+       :pdf-quality="2"
+       :manual-pagination="false"
+       pdf-format="a4"
+       pdf-orientation="landscape"
+       pdf-content-width="800px"
+       ref="html2Pdf"
+   >
+       <section slot="pdf-content">
+          {{retrieveTutorials()}}
+       </section>
+   </VueHtml2pdf>
     <v-container>
       <v-toolbar>
         <v-toolbar-title>Hello!</v-toolbar-title>
@@ -56,12 +74,24 @@
         </v-data-table>
       </v-card>
     </v-container>
+
+    <v-btn
+    color="error"
+    class="mr-4"
+    @click="generateReport()"
+  >
+    Generate PDF
+  </v-btn>
+
   </div>
+
+
 </template>
 
 <script>
 import TutorialServices from "../services/tutorialServices";
 import Utils from '@/config/utils.js'
+import VueHtml2pdf from 'vue-html2pdf'
 
 export default {
   name: "tutorials-list",
@@ -83,6 +113,9 @@ export default {
     this.user = Utils.getStore('user');
     this.retrieveTutorials();
   },
+  components: {
+        VueHtml2pdf
+    },
   methods: {
     editTutorial(tutorial) {
       this.$router.push({ name: 'edit', params: { id: tutorial.id } });
@@ -127,6 +160,10 @@ export default {
           this.message = e.response.data.message;
         });
     },
+
+    generateReport () {
+            this.$refs.html2Pdf.generatePdf()
+        }
     
   }
 };

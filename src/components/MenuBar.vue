@@ -16,21 +16,21 @@
                 <div>{{ this.title }}</div>    
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-toolbar-items v-if="user != null">
-                <!-- <v-btn 
+            <v-toolbar-items v-if="user == null">
+                <v-btn 
                     exact
-                    :to="{ name: 'tutorials' }"
+                    :to="{ name: 'courselists' }"
                     text
                 >
-                    List
+                    Chair List
                 </v-btn>
                 <v-btn 
                     exact
-                    :to="{ name: 'add' }"
+                    :to="{ name: 'courses' }"
                     text
                 >
-                    Add Tutorial
-                </v-btn> -->
+                    Course Catalog
+                </v-btn>
             </v-toolbar-items>
             <v-menu
                 bottom
@@ -92,7 +92,7 @@ export default {
     name: 'App',
     data: () => ({
         user: {},
-        title: 'Tutorials',
+        title: 'Schedule',
         initials: '',
         name: '',
     }),

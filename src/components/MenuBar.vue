@@ -3,7 +3,7 @@
         <v-app-bar
             app
         >
-        <router-link :to="{ name: 'courses' }">
+        <router-link :to="{ name: 'calendar' }">
             <v-img
                 class="mx-2"
                 src="../assets/oc-logo-white.png"

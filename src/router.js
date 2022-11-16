@@ -13,6 +13,7 @@ import EditSection from "./views/EditSection.vue"
 import ViewOfficeHours from "./views/ViewOfficeHours.vue"
 import EditOfficeHours from "./views/EditOfficeHours.vue"
 import AddOfficeHours from "./views/AddOfficeHours.vue"
+import ViewSemesterSchedule from "./views/ViewSemesterSchedule.vue"
 
 Vue.use(Router)
 
@@ -89,7 +90,13 @@ const router =  new Router({
       name: "editoffice",
       component: EditOfficeHours,
       props: true
-    }
+    }, 
+    {
+      path: "/calendar",
+      name: "calendar",
+      component: ViewSemesterSchedule
+    },
+
   ]
 })
 

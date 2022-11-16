@@ -1,9 +1,9 @@
 module.exports = {
   devServer: {
-    host: 'localhost',
+    //host: 'localhost',
     port: 8081
   },
-  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/project3/2022/t4/',
+  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/2022/project3/t4/',
   transpileDependencies: ['vuetify'],
 }
 

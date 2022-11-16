@@ -13,6 +13,8 @@ import CourseCatalog from "./views/CourseCatalog.vue"
 import ChairCourseList from "./views/ChairCourseList.vue"
 import EditChairCourseList from "./views/EditChairCourseList.vue"
 import AddChairCourseList from "./views/AddChairCourseList.vue"
+import ViewSemesterSchedule from "./views/ViewSemesterSchedule.vue"
+
 
 Vue.use(Router)
 
@@ -83,7 +85,15 @@ const router =  new Router({
       name: "addcourse",
       component: AddChairCourseList
     },
+
+    {
+      path: "/calendar",
+      name: "calendar",
+      component: ViewSemesterSchedule
+    },
+    
   ]
-})
+}
+)
 
 export default router;

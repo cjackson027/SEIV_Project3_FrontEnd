@@ -1,14 +1,14 @@
 import apiClient from "@/services/services.js";
 
 export default {
-  getAll() {
-    return apiClient.get("/courses");
-  },
 //   getAllForUser(userId) {
 //     return apiClient.get("/courses/userTut/" + userId);
 //   },
   get(id) {
     return apiClient.get(`/courses/${id}`);
+  },
+  getAll() {
+    return apiClient.get(`/courses/`);
   },
   create(data) {
     return apiClient.post("/courses", data);

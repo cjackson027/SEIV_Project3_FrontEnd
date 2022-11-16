@@ -5,10 +5,11 @@ import Router from "../router.js"
 
 var baseurl = "";
 if (process.env.NODE_ENV === "development") {
-  baseurl = "http://localhost/tutorial/";
+  baseurl = "http://localhost/schedule-t4/";
 } else {
-  baseurl = "/tutorial/";
+  baseurl = "/schedule-t4/";
 }
+// http://project3.eaglesoftwareteam.com/
  
 const apiClient = axios.create({
   baseURL: baseurl,
